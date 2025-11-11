@@ -28,7 +28,7 @@ export default function Hero() {
           <h1 className="h1-clamp">
             <span style={{color: '#FFD700'}}>Austin's</span> <span className="uv-underline">Exotic & Luxury</span> <span style={{color: '#6C00FF'}}>Car Rentals</span>
           </h1>
-          <p className="mt-4 text-white/80 max-w-2xl font-bold">
+          <p className="mt-4 text-white/90 max-w-2xl text-lg sm:text-xl font-semibold tracking-wide">
             Concierge delivery, transparent pricing, and vehicles that command attention.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
