@@ -51,27 +51,17 @@ html, body {
 
 @keyframes shimmer {
   0% {
-    background-position: 200% 0;
+    transform: translate3d(-100%, 0, 0);
   }
   100% {
-    background-position: -200% 0;
+    transform: translate3d(100%, 0, 0);
   }
 }
 
 .glass-shimmer {
-  background: linear-gradient(
-    110deg,
-    transparent 0%,
-    transparent 40%,
-    rgba(255, 255, 255, 0.025) 45%,
-    rgba(255, 255, 255, 0.068) 50%,
-    rgba(255, 255, 255, 0.025) 55%,
-    transparent 60%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 8s ease-in-out infinite;
+  overflow: hidden;
   pointer-events: none;
+  will-change: transform;
 }
 
 .glass-shimmer::before {
@@ -88,17 +78,38 @@ html, body {
 .glass-shimmer::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.017) 25%,
-      transparent 50%,
-      rgba(108, 0, 255, 0.026) 75%,
-      transparent 100%
-    );
-  backdrop-filter: blur(0.5px);
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.025) 45%,
+    rgba(255, 255, 255, 0.068) 50%,
+    rgba(255, 255, 255, 0.025) 55%,
+    transparent 60%,
+    transparent 100%
+  );
+  animation: shimmer 8s ease-in-out infinite;
+  will-change: transform;
   pointer-events: none;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Reduce animation complexity on mobile */
+@media (max-width: 767px) {
+  .glass-shimmer::after {
+    animation-duration: 10s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glass-shimmer::after {
+      animation: none;
+      opacity: 0.5;
+    }
+  }
 }
 
 .text-white\/85 { color: rgba(255,255,255,.85); }
