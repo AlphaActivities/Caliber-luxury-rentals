@@ -1,0 +1,38 @@
+:root{
+  --black:#0A0A0A;
+  --black-2:#0E0E10;
+  --gold:#E2B857;
+  --uv:#7C3AED;
+  --uv-20: rgba(124,58,237,.20);
+  --uv-35: rgba(124,58,237,.35);
+  --gold-25: rgba(226,184,87,.25);
+  --ring: 0 0 0 1px rgba(255,255,255,.06), 0 0 24px var(--uv-20);
+  --glow-uv: 0 0 42px var(--uv-35);
+  --glow-gold: 0 0 28px var(--gold-25);
+  --radius-pill: 9999px;
+}
+.uv-pill{ border-radius:var(--radius-pill); background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.08); box-shadow: var(--ring); backdrop-filter: blur(8px); }
+.nav-glow{ box-shadow: var(--glow-uv), var(--ring); }
+.btn-gold{ background:var(--gold); color:#000; border-radius:var(--radius-pill); @apply inline-flex items-center justify-center px-5 py-3 font-semibold; }
+.btn-gold:hover{ filter:brightness(1.06); }
+.btn-uv{ background:rgba(108,0,255,.25); color:white; border:1px solid rgba(108,0,255,.4); border-radius:var(--radius-pill); @apply inline-flex items-center justify-center px-5 py-3 font-semibold; }
+.btn-uv:hover{ background:var(--uv); border-color:var(--uv); }
+.uv-underline{ background:linear-gradient(90deg, var(--gold), var(--uv)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.tile{ background:linear-gradient(180deg,#111, #0c0c0c); border:1px solid rgba(255,255,255,.07); transition: transform .35s ease, box-shadow .35s ease; }
+.tile:hover{ transform:translateY(-2px); box-shadow:var(--glow-uv); }
+.fade-in{ opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease; }
+.fade-in.reveal{ opacity:1; transform:none; }
+
+.focus-ring { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-purple-500; }
+
+.brand-ribbon {
+  @apply my-10 rounded-2xl px-4 py-3;
+  background: linear-gradient(90deg, rgba(124,58,237,.12), rgba(226,184,87,.12));
+  border: 1px solid rgba(124,58,237,.25);
+  box-shadow: 0 0 30px rgba(124,58,237,.15);
+}
+.brand-ribbon ul { @apply flex items-center justify-between gap-8 flex-wrap; }
+.brand-ribbon img { @apply h-8 opacity-80 transition; }
+.brand-ribbon img:hover { @apply opacity-100; filter: drop-shadow(0 0 8px rgba(124,58,237,.45)); }
+
+.img-aspect { aspect-ratio: 4/3; @apply w-full object-cover rounded-xl; }

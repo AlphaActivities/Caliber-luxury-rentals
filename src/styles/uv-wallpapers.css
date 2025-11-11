@@ -1,0 +1,55 @@
+/* Full-bleed UV wallpapers used by sections */
+.uv-bg-full {
+  background-repeat: no-repeat;
+  background-size: cover;          /* FULLSCREEN coverage (no tiles) */
+  background-position: center;
+  background-attachment: scroll;   /* keep consistent on mobile */
+  position: relative;
+  overflow: hidden;
+  color: inherit;
+}
+
+/* subtle, slow-moving gradient overlay (elegant, not blocky) */
+.uv-gradient-overlay::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(18,10,25,0.40), rgba(18,10,25,0.20)),
+    radial-gradient(1200px 400px at 10% 20%, rgba(120,57,232,0.12), transparent 25%),
+    radial-gradient(900px 300px at 90% 80%, rgba(255,199,44,0.06), transparent 20%);
+  mix-blend-mode: screen;
+  z-index: 0;
+  opacity: 1;
+  animation: uvOverlayShift 28s linear infinite;
+}
+
+/* very subtle movement — slow, cinematic, not repeating squares */
+@keyframes uvOverlayShift {
+  0% { transform: translateX(0) translateY(0) scale(1); }
+  50% { transform: translateX(-3%) translateY(2%) scale(1.02); }
+  100% { transform: translateX(0) translateY(0) scale(1); }
+}
+
+/* Respect reduced motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .uv-gradient-overlay::before { animation: none; }
+}
+
+/* Dark card content layering so text remains readable */
+.uv-bg-full > .section-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* section top fade (optional utility) */
+.uv-fade-top::after{
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0));
+  pointer-events: none;
+  z-index: 1;
+}
