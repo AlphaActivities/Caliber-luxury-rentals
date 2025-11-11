@@ -44,6 +44,32 @@ export default function LandingPage() {
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               className="mt-6 rounded-2xl border border-purple-700/30 bg-black/40 p-6 backdrop-blur-md"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.target as HTMLFormElement;
+                const data = new FormData(form);
+                fetch("/", {
+                  method: "POST",
+                  body: new URLSearchParams(data as any).toString(),
+                  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                })
+                  .then(() => {
+                    const msg = document.createElement("p");
+                    msg.textContent = "✅ Your message has been sent successfully!";
+                    msg.style.color = "#10b981";
+                    msg.style.marginTop = "10px";
+                    msg.style.fontSize = "16px";
+                    msg.style.fontWeight = "600";
+                    msg.style.transition = "opacity 0.5s";
+                    form.appendChild(msg);
+                    setTimeout(() => {
+                      msg.style.opacity = "0";
+                      setTimeout(() => msg.remove(), 500);
+                    }, 5000);
+                    form.reset();
+                  })
+                  .catch(() => alert("Something went wrong. Please try again."));
+              }}
             >
               <input type="hidden" name="form-name" value="caliber-contact" />
               <input type="hidden" name="utm_source" />
